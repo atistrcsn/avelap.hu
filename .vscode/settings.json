@@ -6,9 +6,14 @@
         "**/CVS": true,
         "**/.DS_Store": true,
         "**/Thumbs.db": true,
-        "**/node_modules": true,
+        "**/node_modules": false,
         "**/.next": false,
         "**/.yarn": true
+    },
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/bower_components": true,
+        "**/*.code-search": true
     },
     "explorerExclude.backup": {}
 }

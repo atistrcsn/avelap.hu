@@ -7,7 +7,7 @@
     "build:prod_locally": "rm -rf ./out && cp .env.production .env.local && next build",
     "clear": "rm -rf .next && rm -rf cache",
     "copytypes": "node copy-backend-types.js",
-    "dev": "node --experimental-modules start-dev.mjs",
+    "develop": "node --experimental-modules start-dev.mjs",
     "lint": "eslint .",
     "start": "next start -H 0.0.0.0 -p ${PORT:-8080}",
     "start-network": "node --experimental-modules start.mjs"

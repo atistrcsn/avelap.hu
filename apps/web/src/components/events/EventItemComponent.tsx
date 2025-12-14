@@ -18,7 +18,7 @@ interface EventItemProps {
   registrationUrl?: string | null | undefined;
 }
 
-async function EventItemComponent({
+function EventItemComponent({
   title,
   desc,
   slug,

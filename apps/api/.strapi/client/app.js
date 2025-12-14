@@ -3,6 +3,7 @@
  * Any modifications made will be discarded.
  */
 import videoField from "@sklinet/strapi-plugin-video-field/strapi-admin";
+import seo from "@strapi-community/plugin-seo/strapi-admin";
 import documentation from "@strapi/plugin-documentation/strapi-admin";
 import usersPermissions from "@strapi/plugin-users-permissions/strapi-admin";
 import dragDropContentTypesStrapi5 from "@yunusemrejs/drag-drop-content-types-strapi5/strapi-admin";
@@ -16,6 +17,7 @@ renderAdmin(document.getElementById("strapi"), {
 
   plugins: {
     "video-field": videoField,
+    seo: seo,
     documentation: documentation,
     "users-permissions": usersPermissions,
     "drag-drop-content-types-strapi5": dragDropContentTypesStrapi5,
