@@ -1,0 +1,20 @@
+{
+  "kind": "singleType",
+  "collectionName": "hasznos_cimek_oldals",
+  "info": {
+    "singularName": "hasznos-cimek-oldal",
+    "pluralName": "hasznos-cimek-oldals",
+    "displayName": "Hasznos címek oldal",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "tartalom": {
+      "type": "blocks",
+      "required": true
+    }
+  }
+}

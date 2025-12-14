@@ -1,0 +1,19 @@
+{
+  "name": "Hitelesített",
+  "description": "Default role given to authenticated user.",
+  "type": "authenticated",
+  "documentId": "fqowoalv0jcozkq85myzizhj",
+  "locale": null,
+  "permissions": [
+    {
+      "action": "plugin::users-permissions.auth.changePassword",
+      "documentId": "qjm1ymcwb9hhlnk5s718oqnh",
+      "locale": null
+    },
+    {
+      "action": "plugin::users-permissions.user.me",
+      "documentId": "gdbzr0chb47dnb04b72vwnwf",
+      "locale": null
+    }
+  ]
+}

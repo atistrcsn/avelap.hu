@@ -1,0 +1,28 @@
+{
+  "key": "core_admin_project-settings",
+  "value": {
+    "menuLogo": {
+      "name": "AVE logo_80x80.jpg",
+      "hash": "AVE_logo_80x80_22dc82888d",
+      "url": "https://res.cloudinary.com/dqdh9rsgx/image/upload/v1723979405/AVE_logo_80x80_22dc82888d.jpg",
+      "width": 80,
+      "height": 80,
+      "ext": ".jpg",
+      "size": 6.72,
+      "provider": "cloudinary"
+    },
+    "authLogo": {
+      "name": "Screenshot from 2024-08-18 13-10-53.png",
+      "hash": "Screenshot_from_2024_08_18_13_10_53_0aa2b22ac6",
+      "url": "https://res.cloudinary.com/dqdh9rsgx/image/upload/v1723979473/Screenshot_from_2024_08_18_13_10_53_0aa2b22ac6.png",
+      "width": 327,
+      "height": 309,
+      "ext": ".png",
+      "size": 18.04,
+      "provider": "cloudinary"
+    }
+  },
+  "type": "object",
+  "environment": null,
+  "tag": null
+}

@@ -1,0 +1,14 @@
+{
+  "key": "plugin_drag-drop-content-types-strapi5_settings",
+  "value": {
+    "body": {
+      "rank": "rank",
+      "title": "",
+      "subtitle": "",
+      "triggerWebhooks": false
+    }
+  },
+  "type": "object",
+  "environment": null,
+  "tag": null
+}

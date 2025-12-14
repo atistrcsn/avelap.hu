@@ -1,0 +1,62 @@
+{
+  "kind": "collectionType",
+  "collectionName": "eventtypes",
+  "info": {
+    "singularName": "eventtype",
+    "pluralName": "eventtypes",
+    "displayName": "Programok",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "maxLength": 80
+    },
+    "description": {
+      "type": "text",
+      "maxLength": 250,
+      "required": true
+    },
+    "descriptionLongHTML": {
+      "type": "blocks",
+      "required": true
+    },
+    "headingImage": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "active": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "rank": {
+      "type": "integer"
+    },
+    "gyakori_kerdeseks": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::gyakori-kerdes.gyakori-kerdes",
+      "mappedBy": "program"
+    },
+    "slug": {
+      "type": "string",
+      "required": false,
+      "unique": false
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.seo"
+    }
+  }
+}

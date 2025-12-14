@@ -1,0 +1,21 @@
+{
+  "kind": "singleType",
+  "collectionName": "settings",
+  "info": {
+    "singularName": "setting",
+    "pluralName": "settings",
+    "displayName": "Általános beállítások"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "karbantartas": {
+      "displayName": "Karbantartás",
+      "type": "component",
+      "repeatable": false,
+      "component": "karbantartas.karbantartas"
+    }
+  }
+}

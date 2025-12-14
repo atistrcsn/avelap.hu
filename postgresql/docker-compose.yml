@@ -1,0 +1,27 @@
+#volumes:
+#  vouchershop-data:
+#    driver: local
+
+services:
+  postgres:
+    container_name: pg-temp-db
+    image: postgres:16-bullseye
+    ports:
+      - "127.0.0.1:5432:5432"
+    environment:
+      DEBUG: 'false'
+      POSTGRES_HOST_AUTH_METHOD: trust
+      POSTGRES_USER: strapi
+      POSTGRES_DB: strapi
+#      LANG: hu_HU.UTF-8
+#      LANGUAGE: hu_HU:hu
+#      LC_ALL: hu_HU.UTF-8
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -p 5432 -t2"]
+      interval: 30s
+      timeout: 30s
+      retries: 3
+    volumes:
+      - ./backup/db.backup:/backup
+      - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+#      - vouchershop-data:/var/lib/postgresql

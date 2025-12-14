@@ -1,0 +1,570 @@
+{
+  "name": "Szerkesztő",
+  "code": "strapi-editor",
+  "description": "Editors can manage and publish contents including those of other users.",
+  "documentId": "g0o75lr7ane7axw4o5wzxtab",
+  "locale": null,
+  "permissions": [
+    {
+      "action": "plugin::content-manager.explorer.create",
+      "actionParameters": {},
+      "subject": "api::event.event",
+      "properties": {
+        "fields": [
+          "title",
+          "body",
+          "eventstart",
+          "eventend",
+          "registrationUrl",
+          "registrationUntilDate",
+          "headingImage",
+          "eventtype",
+          "description",
+          "slug",
+          "seo.metaTitle",
+          "seo.metaDescription",
+          "seo.metaImage",
+          "seo.metaSocial.socialNetwork",
+          "seo.metaSocial.title",
+          "seo.metaSocial.description",
+          "seo.metaSocial.image",
+          "seo.keywords",
+          "seo.metaRobots",
+          "seo.structuredData",
+          "seo.metaViewport",
+          "seo.canonicalURL",
+          "location.postalcode",
+          "location.city",
+          "location.address",
+          "location.country"
+        ]
+      },
+      "conditions": [],
+      "documentId": "yjofusfo4yzjcgekydmph4at",
+      "locale": null
+    },
+    {
+      "action": "plugin::content-manager.explorer.delete",
+      "actionParameters": {},
+      "subject": "api::event.event",
+      "properties": {},
+      "conditions": [],
+      "documentId": "r9sq01tz5sflsq5wct3t5j22",
+      "locale": null
+    },
+    {
+      "action": "plugin::content-manager.explorer.publish",
+      "actionParameters": {},
+      "subject": "api::event.event",
+      "properties": {},
+      "conditions": [],
+      "documentId": "egs4v2ri7dnlrzdyndregz4k",
+      "locale": null
+    },
+    {
+      "action": "plugin::content-manager.explorer.read",
+      "actionParameters": {},
+      "subject": "api::event.event",
+      "properties": {
+        "fields": [
+          "title",
+          "body",
+          "eventstart",
+          "eventend",
+          "registrationUrl",
+          "registrationUntilDate",
+          "headingImage",
+          "eventtype",
+          "description",
+          "slug",
+          "seo.metaTitle",
+          "seo.metaDescription",
+          "seo.metaImage",
+          "seo.metaSocial.socialNetwork",
+          "seo.metaSocial.title",
+          "seo.metaSocial.description",
+          "seo.metaSocial.image",
+          "seo.keywords",
+          "seo.metaRobots",
+          "seo.structuredData",
+          "seo.metaViewport",
+          "seo.canonicalURL",
+          "location.postalcode",
+          "location.city",
+          "location.address",
+          "location.country"
+        ]
+      },
+      "conditions": [],
+      "documentId": "eizqlgsxmb390on091m3aitl",
+      "locale": null
+    },
+    {
+      "action": "plugin::content-manager.explorer.update",
+      "actionParameters": {},
+      "subject": "api::event.event",
+      "properties": {
+        "fields": [
+          "title",
+          "body",
+          "eventstart",
+          "eventend",
+          "registrationUrl",
+          "registrationUntilDate",
+          "headingImage",
+          "eventtype",
+          "description",
+          "slug",
+          "seo.metaTitle",
+          "seo.metaDescription",
+          "seo.metaImage",
+          "seo.metaSocial.socialNetwork",
+          "seo.metaSocial.title",
+          "seo.metaSocial.description",
+          "seo.metaSocial.image",
+          "seo.keywords",
+          "seo.metaRobots",
+          "seo.structuredData",
+          "seo.metaViewport",
+          "seo.canonicalURL",
+          "location.postalcode",
+          "location.city",
+          "location.address",
+          "location.country"
+        ]
+      },
+      "conditions": [],
+      "documentId": "zbipykei5hey1s6tj69nshsp",
+      "locale": null
+    },
+    {
+      "action": "plugin::content-manager.explorer.create",
+      "actionParameters": {},
+      "subject": "api::eventtype.eventtype",
+      "properties": {
+        "fields": [
+          "title",
+          "description",
+          "descriptionLongHTML",
+          "headingImage",
+          "active",
+          "rank",
+          "gyakori_kerdeseks",
+          "slug",
+          "seo.metaTitle",
+          "seo.metaDescription",
+          "seo.metaImage",
+          "seo.metaSocial.socialNetwork",
+          "seo.metaSocial.title",
+          "seo.metaSocial.description",
+          "seo.metaSocial.image",
+          "seo.keywords",
+          "seo.metaRobots",
+          "seo.structuredData",
+          "seo.metaViewport",
+          "seo.canonicalURL"
+        ]
+      },
+      "conditions": [],
+      "documentId": "d1c3wekq57fm9w3vd4ozsrl8",
+      "locale": null
+    },
+    {
+      "action": "plugin::content-manager.explorer.delete",
+      "actionParameters": {},
+      "subject": "api::eventtype.eventtype",
+      "properties": {},
+      "conditions": [],
+      "documentId": "c6g825brjqxqg4kzhw7236ps",
+      "locale": null
+    },
+    {
+      "action": "plugin::content-manager.explorer.publish",
+      "actionParameters": {},
+      "subject": "api::eventtype.eventtype",
+      "properties": {},
+      "conditions": [],
+      "documentId": "hbpuos211cvvgfd52vlub3x0",
+      "locale": null
+    },
+    {
+      "action": "plugin::content-manager.explorer.read",
+      "actionParameters": {},
+      "subject": "api::eventtype.eventtype",
+      "properties": {
+        "fields": [
+          "title",
+          "description",
+          "descriptionLongHTML",
+          "headingImage",
+          "active",
+          "rank",
+          "gyakori_kerdeseks",
+          "slug",
+          "seo.metaTitle",
+          "seo.metaDescription",
+          "seo.metaImage",
+          "seo.metaSocial.socialNetwork",
+          "seo.metaSocial.title",
+          "seo.metaSocial.description",
+          "seo.metaSocial.image",
+          "seo.keywords",
+          "seo.metaRobots",
+          "seo.structuredData",
+          "seo.metaViewport",
+          "seo.canonicalURL"
+        ]
+      },
+      "conditions": [],
+      "documentId": "vs2f17jlzzuhnygn6xiksxzq",
+      "locale": null
+    },
+    {
+      "action": "plugin::content-manager.explorer.update",
+      "actionParameters": {},
+      "subject": "api::eventtype.eventtype",
+      "properties": {
+        "fields": [
+          "title",
+          "description",
+          "descriptionLongHTML",
+          "headingImage",
+          "active",
+          "rank",
+          "gyakori_kerdeseks",
+          "slug",
+          "seo.metaTitle",
+          "seo.metaDescription",
+          "seo.metaImage",
+          "seo.metaSocial.socialNetwork",
+          "seo.metaSocial.title",
+          "seo.metaSocial.description",
+          "seo.metaSocial.image",
+          "seo.keywords",
+          "seo.metaRobots",
+          "seo.structuredData",
+          "seo.metaViewport",
+          "seo.canonicalURL"
+        ]
+      },
+      "conditions": [],
+      "documentId": "ul2q9hne8z7fmf6q7utwwywl",
+      "locale": null
+    },
+    {
+      "action": "plugin::content-manager.explorer.create",
+      "actionParameters": {},
+      "subject": "api::gyakori-kerdes.gyakori-kerdes",
+      "properties": {
+        "fields": [
+          "kerdes",
+          "valasz",
+          "rank",
+          "program"
+        ]
+      },
+      "conditions": [],
+      "documentId": "ff5bknni2ldivbg70zmtnv6j",
+      "locale": null
+    },
+    {
+      "action": "plugin::content-manager.explorer.delete",
+      "actionParameters": {},
+      "subject": "api::gyakori-kerdes.gyakori-kerdes",
+      "properties": {},
+      "conditions": [],
+      "documentId": "c5tyzerumo3v14csk6wkffgy",
+      "locale": null
+    },
+    {
+      "action": "plugin::content-manager.explorer.publish",
+      "actionParameters": {},
+      "subject": "api::gyakori-kerdes.gyakori-kerdes",
+      "properties": {},
+      "conditions": [],
+      "documentId": "zqfgg4xiglr93cukgnmo0vbs",
+      "locale": null
+    },
+    {
+      "action": "plugin::content-manager.explorer.read",
+      "actionParameters": {},
+      "subject": "api::gyakori-kerdes.gyakori-kerdes",
+      "properties": {
+        "fields": [
+          "kerdes",
+          "valasz",
+          "rank",
+          "program"
+        ]
+      },
+      "conditions": [],
+      "documentId": "mz4hzw0566mo023boxdsqns1",
+      "locale": null
+    },
+    {
+      "action": "plugin::content-manager.explorer.update",
+      "actionParameters": {},
+      "subject": "api::gyakori-kerdes.gyakori-kerdes",
+      "properties": {
+        "fields": [
+          "kerdes",
+          "valasz",
+          "rank",
+          "program"
+        ]
+      },
+      "conditions": [],
+      "documentId": "ofyhi1yj2qc4f4b5v804fo2f",
+      "locale": null
+    },
+    {
+      "action": "plugin::content-manager.explorer.create",
+      "actionParameters": {},
+      "subject": "api::quote.quote",
+      "properties": {
+        "fields": [
+          "forras",
+          "idezet",
+          "rank"
+        ]
+      },
+      "conditions": [],
+      "documentId": "pqcnyur6zfpt8g1tjfhy7381",
+      "locale": null
+    },
+    {
+      "action": "plugin::content-manager.explorer.delete",
+      "actionParameters": {},
+      "subject": "api::quote.quote",
+      "properties": {},
+      "conditions": [],
+      "documentId": "fjw6pj3vtkpmds3aaa4di66e",
+      "locale": null
+    },
+    {
+      "action": "plugin::content-manager.explorer.publish",
+      "actionParameters": {},
+      "subject": "api::quote.quote",
+      "properties": {},
+      "conditions": [],
+      "documentId": "fubmpwcry4rnwbnpd6leoqs7",
+      "locale": null
+    },
+    {
+      "action": "plugin::content-manager.explorer.read",
+      "actionParameters": {},
+      "subject": "api::quote.quote",
+      "properties": {
+        "fields": [
+          "forras",
+          "idezet",
+          "rank"
+        ]
+      },
+      "conditions": [],
+      "documentId": "h84d1ur4mmw5xyl9nn75auop",
+      "locale": null
+    },
+    {
+      "action": "plugin::content-manager.explorer.update",
+      "actionParameters": {},
+      "subject": "api::quote.quote",
+      "properties": {
+        "fields": [
+          "forras",
+          "idezet",
+          "rank"
+        ]
+      },
+      "conditions": [],
+      "documentId": "oi9665dpkj0jp8ytgv6owt3a",
+      "locale": null
+    },
+    {
+      "action": "plugin::content-manager.explorer.create",
+      "actionParameters": {},
+      "subject": "api::tanitas.tanitas",
+      "properties": {
+        "fields": [
+          "cim",
+          "video",
+          "leiras",
+          "rank"
+        ]
+      },
+      "conditions": [],
+      "documentId": "g7ble8yg40w287hmfecfucl7",
+      "locale": null
+    },
+    {
+      "action": "plugin::content-manager.explorer.delete",
+      "actionParameters": {},
+      "subject": "api::tanitas.tanitas",
+      "properties": {},
+      "conditions": [],
+      "documentId": "q9ssnz74otxv4bfgbp0pceei",
+      "locale": null
+    },
+    {
+      "action": "plugin::content-manager.explorer.publish",
+      "actionParameters": {},
+      "subject": "api::tanitas.tanitas",
+      "properties": {},
+      "conditions": [],
+      "documentId": "iilf7u0tc2pbte8k17g8r18s",
+      "locale": null
+    },
+    {
+      "action": "plugin::content-manager.explorer.read",
+      "actionParameters": {},
+      "subject": "api::tanitas.tanitas",
+      "properties": {
+        "fields": [
+          "cim",
+          "video",
+          "leiras",
+          "rank"
+        ]
+      },
+      "conditions": [],
+      "documentId": "ftw2xnt2zaysy62cbbjabeaa",
+      "locale": null
+    },
+    {
+      "action": "plugin::content-manager.explorer.update",
+      "actionParameters": {},
+      "subject": "api::tanitas.tanitas",
+      "properties": {
+        "fields": [
+          "cim",
+          "video",
+          "leiras",
+          "rank"
+        ]
+      },
+      "conditions": [],
+      "documentId": "mt5b3ivcnbs9hrhus1lu71bn",
+      "locale": null
+    },
+    {
+      "action": "plugin::content-manager.explorer.create",
+      "actionParameters": {},
+      "subject": "api::tanusagtetel.tanusagtetel",
+      "properties": {
+        "fields": [
+          "cim",
+          "video",
+          "leiras",
+          "rank"
+        ]
+      },
+      "conditions": [],
+      "documentId": "qr95apl5iu0iq5orz6jnn460",
+      "locale": null
+    },
+    {
+      "action": "plugin::content-manager.explorer.delete",
+      "actionParameters": {},
+      "subject": "api::tanusagtetel.tanusagtetel",
+      "properties": {},
+      "conditions": [],
+      "documentId": "e9czafowgskzz80m4xvxpk37",
+      "locale": null
+    },
+    {
+      "action": "plugin::content-manager.explorer.publish",
+      "actionParameters": {},
+      "subject": "api::tanusagtetel.tanusagtetel",
+      "properties": {},
+      "conditions": [],
+      "documentId": "w6egmeymhr4dz58yqmk0myjh",
+      "locale": null
+    },
+    {
+      "action": "plugin::content-manager.explorer.read",
+      "actionParameters": {},
+      "subject": "api::tanusagtetel.tanusagtetel",
+      "properties": {
+        "fields": [
+          "cim",
+          "video",
+          "leiras",
+          "rank"
+        ]
+      },
+      "conditions": [],
+      "documentId": "hfrhb4z74d482f70wm93wp6u",
+      "locale": null
+    },
+    {
+      "action": "plugin::content-manager.explorer.update",
+      "actionParameters": {},
+      "subject": "api::tanusagtetel.tanusagtetel",
+      "properties": {
+        "fields": [
+          "cim",
+          "video",
+          "leiras",
+          "rank"
+        ]
+      },
+      "conditions": [],
+      "documentId": "otawqspmn0ws42csw3toqtw6",
+      "locale": null
+    },
+    {
+      "action": "plugin::upload.assets.copy-link",
+      "actionParameters": {},
+      "subject": null,
+      "properties": {},
+      "conditions": [],
+      "documentId": "w1v73n185j2cu3jjbju18kz3",
+      "locale": null
+    },
+    {
+      "action": "plugin::upload.assets.create",
+      "actionParameters": {},
+      "subject": null,
+      "properties": {},
+      "conditions": [],
+      "documentId": "qff171q5hhdpgjeegownenpn",
+      "locale": null
+    },
+    {
+      "action": "plugin::upload.assets.download",
+      "actionParameters": {},
+      "subject": null,
+      "properties": {},
+      "conditions": [],
+      "documentId": "h1j76bntxbhb9dmluihpzup0",
+      "locale": null
+    },
+    {
+      "action": "plugin::upload.assets.update",
+      "actionParameters": {},
+      "subject": null,
+      "properties": {},
+      "conditions": [],
+      "documentId": "hwzodmesgdfyr3pwlxbk8bb0",
+      "locale": null
+    },
+    {
+      "action": "plugin::upload.configure-view",
+      "actionParameters": {},
+      "subject": null,
+      "properties": {},
+      "conditions": [],
+      "documentId": "ch7se0rh1n6oe6fozfr9ya84",
+      "locale": null
+    },
+    {
+      "action": "plugin::upload.read",
+      "actionParameters": {},
+      "subject": null,
+      "properties": {},
+      "conditions": [],
+      "documentId": "zx2hwsdqzz7neonlq7bustml",
+      "locale": null
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "installation": {
+    "version": "22.2.3",
+    "plugins": {
+      "@nx/eslint": "22.2.3",
+      "@nx/next": "22.2.3"
+    }
+  },
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "defaultBase": "main"
+}

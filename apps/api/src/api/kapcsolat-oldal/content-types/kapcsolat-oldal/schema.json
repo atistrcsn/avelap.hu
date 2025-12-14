@@ -1,0 +1,20 @@
+{
+  "kind": "singleType",
+  "collectionName": "kapcsolat_oldals",
+  "info": {
+    "singularName": "kapcsolat-oldal",
+    "pluralName": "kapcsolat-oldals",
+    "displayName": "Kapcsolat oldal",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "tartalom": {
+      "type": "blocks",
+      "required": true
+    }
+  }
+}

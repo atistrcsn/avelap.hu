@@ -1,0 +1,179 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
+
+/* Additional styles */
+@import './additional-styles/utility-patterns.css' layer(components);
+@import './additional-styles/range-slider.css' layer(components);
+@import './additional-styles/toggle-switch.css' layer(components);
+@import './additional-styles/theme.css' layer(components);
+
+@theme {
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+
+  --color-ave-text-black: #212529;
+
+  --color-ave-blue-50: #f0fafb;
+  --color-ave-blue-100: #d8f2f5;
+  --color-ave-blue-200: #b6e4eb;
+  --color-ave-blue-300: #83cfdd;
+  --color-ave-blue-400: #49b0c7;
+  --color-ave-blue-500: #2d94ad;
+  --color-ave-blue-700: #276277;
+  --color-ave-blue-800: #275163;
+  --color-ave-blue-900: #254554;
+  --color-ave-blue-950: #132c39;
+  --color-ave-blue: #287790;
+
+  --color-ave-gold-50: #faf8ec;
+  --color-ave-gold-100: #f4edcd;
+  --color-ave-gold-200: #ead99e;
+  --color-ave-gold-300: #ddc067;
+  --color-ave-gold-500: #c29230;
+  --color-ave-gold-600: #a77327;
+  --color-ave-gold-700: #865422;
+  --color-ave-gold-800: #704523;
+  --color-ave-gold-900: #603b23;
+  --color-ave-gold-950: #371e11;
+  --color-ave-gold-400-base: #cfa232;
+
+  --spacing-9\/16: 56.25%;
+  --spacing-3\/4: 75%;
+  --spacing-1\/1: 100%;
+
+  --font-ibmplexserif: var(--font-ibmplexserif), sans-serif;
+  --font-ibmplexsans: var(--font-ibmplexsans), sans;
+  --font-playfairdisplay: var(--font-playfairdisplay), sans-serif;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 2rem;
+  --text-4xl: 2.5rem;
+  --text-5xl: 3.25rem;
+  --text-6xl: 4rem;
+
+  --inset-full: 100%;
+
+  --tracking-tighter: -0.02em;
+  --tracking-tight: -0.01em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.01em;
+  --tracking-wider: 0.02em;
+  --tracking-widest: 0.4em;
+
+  --min-width-10: 2.5rem;
+
+  --scale-98: 0.98;
+
+  --background-image-gradient-radial: radial-gradient(var(--tw-gradient-stops));
+  --background-image-gradient-conic: conic-gradient(
+    from 180deg at 50% 50%,
+    var(--tw-gradient-stops)
+  );
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
+
+@utility not-found-funny-causes {
+  padding-left: 20px;
+  & li {
+    list-style: disc;
+    list-style-position: outside;
+  }
+  & li:not(:last-child) {
+    margin-bottom: 12px;
+  }
+  & li strong {
+    margin-right: 6px;
+  }
+}
+
+/* Additional Tailwind directives: https://tailwindcss.com/docs/functions-and-directives/#responsive */
+@utility rtl {
+  direction: rtl;
+}
+
+@layer base {
+  address,
+  blockquote,
+  dd,
+  dl,
+  fieldset,
+  form {
+    @apply mb-7;
+  }
+
+  strong {
+    font-weight: 500;
+  }
+/* 
+  h2 {
+    @apply text-3xl
+  }
+
+  h3 {
+    @apply text-2xl
+  }
+
+  h4 {
+    @apply text-xl
+  }
+
+  h5 {
+    @apply text-lg
+  }
+
+  h6 {
+    @apply text-base
+  } */
+}
+
+/* See Alpine.js: https://github.com/alpinejs/alpine#x-cloak */
+[x-cloak=""] {
+  display: none;
+}
+
+:root {
+  --color-ave-gold: var(--color-ave-gold-400-base);
+}
+
+.btn-styleee {
+  @apply text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out;
+}

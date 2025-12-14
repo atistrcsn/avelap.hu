@@ -1,0 +1,9 @@
+{
+  "name": "@avelap/root",
+  "version": "0.1.0",
+  "scripts": {
+    "build": "nx next:build && echo 'Build complete'",
+    "lint": "nx eslint:lint"
+  },
+  "packageManager": "pnpm@10.25.0"
+}

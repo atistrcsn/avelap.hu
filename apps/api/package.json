@@ -1,0 +1,51 @@
+{
+  "name": "@avelap/api",
+  "version": "1.1.0",
+  "private": true,
+  "description": "avelap.hu backend (Strapi)",
+  "license": "MIT",
+  "author": {
+    "name": "atistrcsn"
+  },
+  "scripts": {
+    "build": "strapi build",
+    "cfgsync": "config-sync",
+    "develop": "strapi develop",
+    "export": "pnpm strapi export --no-encrypt -f ../seed-data",
+    "seed": "pnpm strapi import -f ../seed-data.tar.gz",
+    "start": "strapi start",
+    "strapi": "strapi"
+  },
+  "dependencies": {
+    "@sklinet/strapi-plugin-video-field": "^1.1.2",
+    "@strapi/plugin-documentation": "5.31.3",
+    "@strapi-community/plugin-seo": "^2.0.9",
+    "@strapi/plugin-users-permissions": "5.31.3",
+    "@strapi/provider-upload-cloudinary": "^5.31.3",
+    "@strapi/strapi": "5.31.3",
+    "@yunusemrejs/drag-drop-content-types-strapi5": "^1.0.11",
+    "pg": "^8.16.3",
+    "pg-connection-string": "^2.9.1",
+    "react": "catalog:react18",
+    "react-dom": "catalog:react18",
+    "react-router-dom": "^6.0.0",
+    "strapi-plugin-config-sync": "^3.1.2",
+    "strapi-plugin-slugify": "^2.3.8",
+    "styled-components": "^6.1.19"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.25.0",
+    "@babel/plugin-transform-runtime": "^7.25.0",
+    "@babel/preset-react": "^7.25.0",
+    "babel-loader": "^9.2.0",
+    "better-sqlite3": "12.5.0",
+    "@strapi/typescript-utils": "^5.32.0"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "strapi": {
+    "uuid": "d5f5c158-e89f-4505-847f-4cefe7ccd649",
+    "telemetryDisabled": true
+  }
+}

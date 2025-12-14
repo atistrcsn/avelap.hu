@@ -1,0 +1,9 @@
+{
+    "recommendations": [
+        "nrwl.angular-console",
+        "eamodio.gitlens",
+        "steoates.autoimport",
+        "yoavbls.pretty-ts-errors",
+        "codezombiech.gitignore"
+    ]
+}

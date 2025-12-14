@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "quotes",
+  "info": {
+    "singularName": "quote",
+    "pluralName": "quotes",
+    "displayName": "Idézetek"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "forras": {
+      "type": "string",
+      "required": true
+    },
+    "idezet": {
+      "type": "text",
+      "required": true,
+      "maxLength": 255
+    },
+    "rank": {
+      "type": "integer",
+      "required": false
+    }
+  }
+}

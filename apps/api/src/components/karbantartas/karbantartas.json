@@ -1,0 +1,30 @@
+{
+  "collectionName": "components_karbantartas_karbantartas",
+  "info": {
+    "displayName": "Karbantartás",
+    "icon": "clock"
+  },
+  "options": {},
+  "attributes": {
+    "isEnabled": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "desc": {
+      "type": "text",
+      "required": true,
+      "maxLength": 255
+    },
+    "startDateTime": {
+      "type": "datetime"
+    },
+    "endDateTime": {
+      "type": "datetime"
+    }
+  }
+}

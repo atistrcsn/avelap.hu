@@ -1,0 +1,119 @@
+{
+  "name": "Publikus",
+  "description": "Default role given to unauthenticated user.",
+  "type": "public",
+  "documentId": "tckdooayvndfkx05l4js4j61",
+  "locale": null,
+  "permissions": [
+    {
+      "action": "api::event.event.find",
+      "documentId": "pioaj04gtmt0ifmoe7g0vijv",
+      "locale": null
+    },
+    {
+      "action": "api::event.event.findOne",
+      "documentId": "hndcufnqcwjavtxr69iu15wy",
+      "locale": null
+    },
+    {
+      "action": "api::eventtype.eventtype.find",
+      "documentId": "cuhe4j6dsc4gvdhfj432zrql",
+      "locale": null
+    },
+    {
+      "action": "api::eventtype.eventtype.findOne",
+      "documentId": "lv3gu4leeca7gwq23hd9ycnp",
+      "locale": null
+    },
+    {
+      "action": "api::gyakori-kerdes.gyakori-kerdes.find",
+      "documentId": "seiamnmq8ka0k5opccm03iod",
+      "locale": null
+    },
+    {
+      "action": "api::gyakori-kerdes.gyakori-kerdes.findOne",
+      "documentId": "tplp3am735qbc9kizz0cq08z",
+      "locale": null
+    },
+    {
+      "action": "api::hasznos-cimek-oldal.hasznos-cimek-oldal.find",
+      "documentId": "yg5436zpbzc2odfcas409h52",
+      "locale": null
+    },
+    {
+      "action": "api::kapcsolat-oldal.kapcsolat-oldal.find",
+      "documentId": "wmolqlpojzzvna0zfbnfeg3d",
+      "locale": null
+    },
+    {
+      "action": "api::quote.quote.find",
+      "documentId": "w2n4mcj87nk0untqx4p2yda7",
+      "locale": null
+    },
+    {
+      "action": "api::quote.quote.findOne",
+      "documentId": "qptbmxdh7ej03xbggk9odf84",
+      "locale": null
+    },
+    {
+      "action": "api::setting.setting.find",
+      "documentId": "wc9h8hfrhdwcpqxl93ip529x",
+      "locale": null
+    },
+    {
+      "action": "api::tanitas.tanitas.find",
+      "documentId": "t9199am70pdct5m6g6qynk06",
+      "locale": null
+    },
+    {
+      "action": "api::tanitas.tanitas.findOne",
+      "documentId": "ta0iegfhfx5h2xq1di3yhz1z",
+      "locale": null
+    },
+    {
+      "action": "api::tanusagtetel.tanusagtetel.find",
+      "documentId": "l9ozrwncidhtzwzs99kvgwnd",
+      "locale": null
+    },
+    {
+      "action": "api::tanusagtetel.tanusagtetel.findOne",
+      "documentId": "exy1anhreh9sotz476twlk2z",
+      "locale": null
+    },
+    {
+      "action": "plugin::users-permissions.auth.callback",
+      "documentId": "xy1vj91dp9xc8f3g9320uuzf",
+      "locale": null
+    },
+    {
+      "action": "plugin::users-permissions.auth.connect",
+      "documentId": "r4guay6kn0hsi1fasi7aipfc",
+      "locale": null
+    },
+    {
+      "action": "plugin::users-permissions.auth.emailConfirmation",
+      "documentId": "of276kgbbhmubpqv2uybnjzm",
+      "locale": null
+    },
+    {
+      "action": "plugin::users-permissions.auth.forgotPassword",
+      "documentId": "gr8yg00zac4i60fddryjgqx7",
+      "locale": null
+    },
+    {
+      "action": "plugin::users-permissions.auth.register",
+      "documentId": "lu707eotpj7dy13log2t1mj0",
+      "locale": null
+    },
+    {
+      "action": "plugin::users-permissions.auth.resetPassword",
+      "documentId": "z24ksigcj3o3oiky190as6ee",
+      "locale": null
+    },
+    {
+      "action": "plugin::users-permissions.auth.sendEmailConfirmation",
+      "documentId": "x10rotggnre1pcl6jhisbjp4",
+      "locale": null
+    }
+  ]
+}

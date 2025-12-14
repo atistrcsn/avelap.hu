@@ -1,0 +1,34 @@
+{
+  "kind": "collectionType",
+  "collectionName": "gyakori_kerdesek",
+  "info": {
+    "singularName": "gyakori-kerdes",
+    "pluralName": "gyakori-kerdesek",
+    "displayName": "Gyakori kérdések",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "kerdes": {
+      "type": "string",
+      "required": true,
+      "minLength": 3
+    },
+    "valasz": {
+      "type": "blocks",
+      "required": true
+    },
+    "rank": {
+      "type": "integer"
+    },
+    "program": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::eventtype.eventtype",
+      "inversedBy": "gyakori_kerdeseks"
+    }
+  }
+}

@@ -1,0 +1,143 @@
+{
+  "key": "plugin_content_manager_configuration_components::karbantartas.karbantartas",
+  "value": {
+    "uid": "karbantartas.karbantartas",
+    "settings": {
+      "bulkable": true,
+      "filterable": true,
+      "searchable": true,
+      "pageSize": 10,
+      "mainField": "title",
+      "defaultSortBy": "title",
+      "defaultSortOrder": "ASC"
+    },
+    "metadatas": {
+      "id": {
+        "edit": {},
+        "list": {
+          "label": "id",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "isEnabled": {
+        "edit": {
+          "label": "Engedélyezve?",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "isEnabled",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "title": {
+        "edit": {
+          "label": "Rövid cím",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "title",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "desc": {
+        "edit": {
+          "label": "Rövid leírás",
+          "description": "Max. néhány mondat, hogy miért nem elérhető az oldal ",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "desc",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "startDateTime": {
+        "edit": {
+          "label": "Ekkor kezdődik",
+          "description": "Karbantartás kezdete",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "startDateTime",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "endDateTime": {
+        "edit": {
+          "label": "Eddig tart",
+          "description": "Karbantartás vége",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "endDateTime",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "documentId": {
+        "edit": {},
+        "list": {
+          "label": "documentId",
+          "searchable": true,
+          "sortable": true
+        }
+      }
+    },
+    "layouts": {
+      "list": [
+        "id",
+        "isEnabled",
+        "title",
+        "desc"
+      ],
+      "edit": [
+        [
+          {
+            "name": "isEnabled",
+            "size": 4
+          }
+        ],
+        [
+          {
+            "name": "title",
+            "size": 4
+          },
+          {
+            "name": "desc",
+            "size": 8
+          }
+        ],
+        [
+          {
+            "name": "startDateTime",
+            "size": 4
+          },
+          {
+            "name": "endDateTime",
+            "size": 4
+          }
+        ]
+      ]
+    },
+    "isComponent": true
+  },
+  "type": "object",
+  "environment": null,
+  "tag": null
+}
