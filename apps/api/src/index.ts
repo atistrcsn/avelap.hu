@@ -7,7 +7,67 @@
  *   GITHUB_REPO_NAME    — Repository name (e.g. avelap-monorepo)
  */
 
-// Actions that indicate meaningful content changes and should trigger a rebuild.
+// ─── Slug generation ──────────────────────────────────────────────────────────
+
+/** Content types that receive auto-generated slugs from their `title` field. */
+const SLUG_TYPES = new Set(['api::event.event', 'api::eventtype.eventtype']);
+const SLUG_ACTIONS = new Set(['create', 'update']);
+
+/**
+ * Convert a Hungarian (or general Latin) title into a URL-safe slug.
+ * Handles accented characters without any external dependency.
+ */
+function toSlug(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/á/g, 'a').replace(/é/g, 'e').replace(/í/g, 'i')
+    .replace(/ó/g, 'o').replace(/ö/g, 'o').replace(/ő/g, 'o')
+    .replace(/ú/g, 'u').replace(/ü/g, 'u').replace(/ű/g, 'u')
+    .replace(/[^a-z0-9\s-]/g, '')
+    .trim()
+    .replace(/[\s_]+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '');
+}
+
+/**
+ * Generate a unique slug for the given content type.
+ * Appends a numeric suffix (-1, -2, …) when the base slug already exists,
+ * excluding the current document so updates don't conflict with themselves.
+ */
+async function generateUniqueSlug(
+  strapiInstance: any,
+  uid: string,
+  title: string,
+  currentDocumentId?: string,
+): Promise<string> {
+  const base = toSlug(title);
+  if (!base) return '';
+
+  const existing: Array<{ slug: string; documentId: string }> =
+    await strapiInstance.documents(uid).findMany({
+      filters: { slug: { $startsWith: base } },
+      fields: ['slug', 'documentId'],
+      status: 'draft',
+      limit: 100,
+    });
+
+  const taken = new Set(
+    existing
+      .filter((doc) => doc.documentId !== currentDocumentId)
+      .map((doc) => doc.slug),
+  );
+
+  if (!taken.has(base)) return base;
+
+  let n = 1;
+  while (taken.has(`${base}-${n}`)) n++;
+  return `${base}-${n}`;
+}
+
+// ─── Deploy webhook ────────────────────────────────────────────────────────────
+
+/** Actions that indicate meaningful content changes and should trigger a rebuild. */
 const DEPLOY_ACTIONS = new Set(['create', 'update', 'delete', 'publish', 'unpublish']);
 
 /**
@@ -52,26 +112,44 @@ async function triggerDeploy(strapi: { log: { error: (...args: unknown[]) => voi
   }
 }
 
+// ─── App registration ──────────────────────────────────────────────────────────
+
 export default {
   /**
    * Register phase — runs before the application is initialised.
    * We attach a global document service middleware here so it covers every
    * content type without needing per-type lifecycle files.
    */
-  register({ strapi }: { strapi: Parameters<typeof triggerDeploy>[0] & { documents: { use: Function } } }) {
-    strapi.documents.use(async (context: { action: string }, next: () => Promise<unknown>) => {
-      // Always let the original action complete first.
-      // Re-throw so Strapi's error handling pipeline is not bypassed.
+  register({ strapi }: { strapi: any }) {
+    strapi.documents.use(async (context: { uid: string; action: string; params: any; documentId?: string }, next: () => Promise<unknown>) => {
+
+      // ── Slug auto-generation (runs BEFORE the operation) ──────────────────
+      if (SLUG_TYPES.has(context.uid) && SLUG_ACTIONS.has(context.action)) {
+        const data = context.params?.data;
+        // Only generate when a title is present and slug was not manually provided
+        if (data?.title && !data.slug) {
+          data.slug = await generateUniqueSlug(
+            strapi,
+            context.uid,
+            data.title,
+            context.documentId,
+          );
+        }
+      }
+
+      // ── Execute the original operation ────────────────────────────────────
       let result: unknown;
       try {
         result = await next();
       } catch (err) {
+        // Re-throw so Strapi's error handling pipeline is not bypassed.
         throw err;
       }
 
+      // ── Deploy webhook (runs AFTER the operation completes) ───────────────
       if (DEPLOY_ACTIONS.has(context.action)) {
-        // Fire-and-forget: we await the call so errors are logged synchronously
-        // within this request cycle, but we never throw to the caller.
+        // Fire-and-forget: we await so errors are logged in this request cycle,
+        // but we never throw to the caller.
         await triggerDeploy(strapi);
       }
 

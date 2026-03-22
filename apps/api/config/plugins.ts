@@ -30,23 +30,6 @@ export default ({ env }) => ({
   "video-field": {
     enabled: true,
   },
-  slugify: {
-    enabled: true,
-    config: {
-      contentTypes: {
-        eventtype: {
-          field: "slug",
-          references: "title",
-        },
-        event: {
-          field: "slug",
-          references: "title",
-        },
-      },
-      slugifyWithCount: true,
-      shouldUpdateSlug: true,
-    },
-  },
   "config-sync": {
     enabled: true,
   },
