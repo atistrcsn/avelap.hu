@@ -1,0 +1,92 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3:*)",
+      "Bash(pnpm:*)",
+      "Bash(npx:*)",
+      "Bash(nx:*)",
+      "Bash(node:*)",
+      "Bash(grep:*)",
+      "Bash(find:*)",
+      "Bash(ls:*)",
+      "Bash(mkdir:*)",
+      "Bash(mv:*)",
+      "Bash(cp:*)",
+      "Bash(cat:*)",
+      "Bash(echo:*)",
+      "Bash(touch:*)",
+      "Bash(rm:*)",
+      "Bash(sed:*)",
+      "Bash(awk:*)",
+      "Bash(head:*)",
+      "Bash(tail:*)",
+      "Bash(chmod:*)",
+      "Bash(git:*)",
+      "Bash(lsof:*)",
+      "Bash(ps:*)",
+      "Bash(kill:*)",
+      "Bash(pkill:*)",
+      "Bash(export:*)",
+      "Bash(source:*)",
+      "Bash(which:*)",
+      "Bash(env:*)",
+      "Read",
+      "Write",
+      "Edit",
+      "WebFetch(domain:docs.strapi.io)"
+    ],
+    "defaultMode": "bypassPermissions",
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env*)",
+      "Read(./secrets/**)",
+      "Read(./config/credentials.json)",
+      "Read(./config/credentials.yml)",
+      "Write(./.claude/settings.json)",
+      "Edit(./.claude/settings.json)",
+      "Write(./.claude/settings.local.json)"
+    ]
+  },
+  "sandbox": {
+    "enabled": true,
+    "autoAllowBashIfSandboxed": true,
+    "network": {
+      "allowedDomains": [
+        "localhost:3000",
+        "localhost:3002",
+        "localhost:9999",
+        "localhost:4096",
+        "localhost:4400",
+        "localhost:4200",
+        "127.0.0.1:3000",
+        "127.0.0.1:3002",
+        "127.0.0.1:9999",
+        "127.0.0.1:4096",
+        "127.0.0.1:4400",
+        "127.0.0.1:4200",
+        "registry.npmjs.org",
+        "github.com",
+        "docs.strapi.io",
+        "cloud.nx.app"
+      ]
+    },
+    "filesystem": {
+      "allowWrite": [
+        ".",
+        "//tmp/build"
+      ],
+      "denyWrite": [
+        ".env",
+        ".env.local",
+        ".env.production",
+        ".env.staging",
+        ".env.development",
+        ".claude/settings.json",
+        ".claude/settings.local.json"
+      ]
+    }
+  },
+  "enabledPlugins": {
+    "plannotator@plannotator": true
+  }
+}
