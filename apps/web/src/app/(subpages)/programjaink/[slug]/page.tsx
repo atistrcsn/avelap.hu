@@ -1,5 +1,4 @@
 import EventTypePage from "@/app/(subpages)/programjaink/[slug]/ProgramjainkPage";
-import { AveConfig } from "@/app/app-config";
 import { APIResponse } from "@/types/types";
 import { getEventTypeList, getOneEventType } from "@/utils/api-requests";
 import { Metadata } from "next";
@@ -12,9 +11,7 @@ export const metadata: Metadata = {
   },
 };
 
-export const revalidate = AveConfig.cache.revalidateAfter;
-
-export const dynamicParams = true;
+export const dynamicParams = false;
 
 export async function generateStaticParams() {
   let events = await getEventTypeList();

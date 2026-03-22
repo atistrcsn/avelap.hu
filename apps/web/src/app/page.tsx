@@ -1,37 +1,17 @@
-import { AveConfig } from "@/app/app-config";
 import EventListComponent from "@/components/events/EventListComponent";
 import QuotesComponent from "@/components/quotes/quotesComponent";
 import Loader from "@/components/ui/loader";
 import {
+  getAllEvents,
   getEventListQueryParams,
-  getPaginatedEvents,
 } from "@/utils/api-requests";
 import Image from "next/image";
-import { env } from "process";
 import { Suspense } from "react";
 import { ImQuotesLeft } from "react-icons/im";
 import bgImage from "./dicsoites-fentrol-nezve.webp";
 
-export const revalidate = AveConfig.cache.revalidateAfter;
-
-const isProd = env.NODE_ENV == "production";
-
-export default async function Home(
-  props: {
-    params: Promise<{ slug: string }>;
-    searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
-  }
-) {
-  const searchParams = await props.searchParams;
-  const [page, limit] = [
-    Number(searchParams["page"]) || 1,
-    Number(searchParams["size"]) || AveConfig.pagination.sizes[0],
-  ];
-    const eventListResponse = await getPaginatedEvents(
-    page,
-    limit,
-    getEventListQueryParams()
-  );
+export default async function Home() {
+  const eventListResponse = await getAllEvents(getEventListQueryParams());
 
   return (
     <div id="fooldal" className="mb-10">

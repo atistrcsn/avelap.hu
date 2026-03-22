@@ -1,0 +1,68 @@
+# ─── Node modules ─────────────────────────────────────────────────────────────
+# All node_modules are installed fresh inside the image; sending them in the
+# build context wastes bandwidth and can introduce platform-mismatched binaries.
+node_modules/
+apps/*/node_modules/
+
+# ─── Strapi runtime / dev artefacts ───────────────────────────────────────────
+# .tmp holds the SQLite dev database, Strapi's temporary build cache, and other
+# ephemeral runtime files. None of these belong in a production image.
+apps/api/.tmp/
+.tmp/
+
+# ─── Built output ─────────────────────────────────────────────────────────────
+# apps/api/dist/ is produced inside the builder stage by `pnpm build`; any local
+# dist/ would be overwritten and only adds unnecessary bytes to the context.
+# The monorepo-level dist/ (NX output) is also irrelevant for the API image.
+apps/api/dist/
+dist/
+
+# ─── Environment / secrets ────────────────────────────────────────────────────
+# Never allow .env files into the build context; secrets are injected at runtime
+# via environment variables or a secrets manager.
+.env
+.env.*
+apps/api/.env
+apps/api/.env.*
+
+# ─── Logs ─────────────────────────────────────────────────────────────────────
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ─── Test / coverage artefacts ────────────────────────────────────────────────
+coverage/
+.nyc_output/
+apps/api/coverage/
+apps/api/.nyc_output/
+
+# ─── Documentation ────────────────────────────────────────────────────────────
+*.md
+!README.md
+
+# ─── OS artefacts ─────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+
+# ─── Editor / IDE configs ─────────────────────────────────────────────────────
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# ─── CI / tooling configs ─────────────────────────────────────────────────────
+# The .github directory and NX cache are not needed inside the Docker image.
+.github/
+.nx/
+.opencode/
+
+# ─── The web app ──────────────────────────────────────────────────────────────
+# The API Dockerfile only builds the @avelap/api workspace. Exclude the entire
+# web app to keep the build context small.
+apps/web/
+
+# ─── Devcontainer / local infra ───────────────────────────────────────────────
+.devcontainer/
+postgresql/

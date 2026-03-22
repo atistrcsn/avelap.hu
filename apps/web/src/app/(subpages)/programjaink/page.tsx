@@ -1,4 +1,3 @@
-import { AveConfig } from "@/app/app-config";
 import EventtypeListComponent from "@/components/eventtypes/EventtypeListComponent";
 import { PageHeading } from "@/components/page-heading";
 import Loader from "@/components/ui/loader";
@@ -11,8 +10,6 @@ export const metadata: Metadata = {
     default: "Programjaink",
   },
 };
-
-export const revalidate = AveConfig.cache.revalidateAfter;
 
 export default async function ProgramjainkPage() {
   return (

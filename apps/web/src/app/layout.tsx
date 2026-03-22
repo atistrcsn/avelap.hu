@@ -5,7 +5,6 @@ import {
 } from "next/font/google";
 import "./css/style.css";
 
-import { AveConfig } from "@/app/app-config";
 import PageIllustration from "@/components/page-illustration";
 import Footer from "@/components/ui/footer";
 import Header from "@/components/ui/header";
@@ -49,8 +48,6 @@ export const metadata: Metadata = {
     "site-version": process.env.version as string,
   },
 };
-
-export const revalidate = AveConfig.cache.revalidateAfter;
 
 export default async function RootLayout({
   children,

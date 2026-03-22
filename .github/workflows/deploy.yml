@@ -1,0 +1,78 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  repository_dispatch:
+    # Triggered by Strapi webhook when content changes (e.g. new event published)
+    types: [strapi-content-change]
+
+# Only one deploy may run at a time; a newer push cancels an in-flight run
+concurrency:
+  group: deploy
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Fetch all required secrets from Bitwarden Secrets Manager.
+      - name: Get Secrets from Bitwarden
+        uses: bitwarden/sm-action@v3
+        with:
+          access_token: ${{ secrets.BW_ACCESS_TOKEN }}
+          secrets: |
+            ecc1ef6e-f60a-46b9-9a0f-b41500b41e27 > API_BASEURL
+            3be3df10-f821-4166-8d84-b41500b77dc1 > GOOGLETAG_ID
+            741db4f6-b12e-4fb5-94f1-b41500b7611e > NEXT_PUBLIC_GOOGLE_MAPS_APIKEY
+            6b902d5f-afa0-4996-85a5-b41500b993f4 > CLOUDFLARE_API_TOKEN
+            71e838dd-90da-4b4e-8c6a-b41500b9c7d2 > CLOUDFLARE_ACCOUNT_ID
+            5835df75-14d7-45cc-a10a-b41500b68895 > BASEURL
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.25.0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      # Koyeb free-tier instances spin down when idle; poll the health endpoint
+      # until Strapi responds (up to 90 s = 18 attempts x 5 s) before building,
+      # so the Next.js static export can reach live content-type data.
+      - name: Wake Strapi
+        run: |
+          echo "Waking Strapi..."
+          for i in $(seq 1 18); do
+            if curl -sf "$API_BASEURL/_health" > /dev/null 2>&1; then
+              echo "Strapi is ready after $i attempts"
+              exit 0
+            fi
+            echo "Attempt $i/18 - waiting 5s..."
+            sleep 5
+          done
+          echo "ERROR: Strapi did not wake up within 90 seconds"
+          exit 1
+
+      # Static export: Next.js reads content from the live Strapi API at build time
+      - name: Build Next.js static export
+        working-directory: apps/web
+        run: pnpm build
+        env:
+          API_BASEURL: ${{ env.API_BASEURL }}
+          GOOGLETAG_ID: ${{ env.GOOGLETAG_ID }}
+          NEXT_PUBLIC_GOOGLE_MAPS_APIKEY: ${{ env.NEXT_PUBLIC_GOOGLE_MAPS_APIKEY }}
+          BASEURL: ${{ env.BASEURL }}
+
+      # Upload the static output directory to Cloudflare Pages
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ env.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ env.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy apps/web/out --project-name=avelap-hu

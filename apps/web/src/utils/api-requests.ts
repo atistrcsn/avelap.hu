@@ -1,16 +1,9 @@
 import { APIResponseCollection, APIResponse } from "@/types/types";
-import { logger } from "@/utils/logger";
 import { format } from "date-fns";
 import qs from "qs";
-import { strapi } from '@strapi/client';
-
 
 const backendBaseURL = process.env.apiBaseURL as string;
 const apiURL = (backendBaseURL + "/api") as string;
-
-const client = strapi({
-  baseURL: apiURL
-});
 
 
 type QueryType = {
@@ -41,14 +34,30 @@ const createPaginatedURL = (
 
 export async function getEvents(qStrings?: QueryType) {
   const url = createURL("/events", { populate: "*", ...qStrings });
-  const res = await fetch(url, { next: { tags: ["events"] } }).catch((e) => {
-    logger.error(e);
+  const res = await fetch(url).catch((e) => {
+    console.error(e);
+    throw e;
   });
-  return (await res?.json()) as APIResponseCollection<"api::event.event">;
+  return (await res.json()) as APIResponseCollection<"api::event.event">;
+}
+
+// Fetches all events without server-side pagination (high limit), applying
+// optional query params. Used for client-side pagination on the homepage.
+// NOTE: capped at 100 items — sufficient for this community site.
+export async function getAllEvents(qStrings?: QueryType) {
+  const url = createPaginatedURL("/events", 1, 100, {
+    populate: "*",
+    ...qStrings,
+  });
+  const res = await fetch(url).catch((e) => {
+    console.error(e);
+    throw e;
+  });
+  return (await res.json()) as APIResponseCollection<"api::event.event">;
 }
 
 export const getEventListQueryParams = (date: number = Date.now()) => ({
-  publicationState: "live",
+  "status": "published",
   "sort[0]": "eventstart:asc",
   "filters[eventstart][$gte]": format(date, "yyyy-MM-dd"),
 });
@@ -62,13 +71,13 @@ export async function getPaginatedEvents(
     populate: "*",
     ...qStrings,
   });
-  const res = await fetch(url, { next: { tags: ["events"] } });
+  const res = await fetch(url);
   return (await res.json()) as APIResponseCollection<"api::event.event">;
 }
 
 export async function getAppSettings() {
   const url = createURL(`/setting`, { populate: "*" });
-  const response = await fetch(url, { next: { tags: ["setting"] } }).then(
+  const response = await fetch(url).then(
     (res) => res.json()
   );
 
@@ -77,19 +86,17 @@ export async function getAppSettings() {
 
 export async function getHasznosLinkekContent() {
   const url = createURL(`/hasznos-cimek-oldal`);
-  const response = await fetch(url, {
-    next: { tags: ["hasznos-cimek-oldal"] },
-  }).then((res) => res.json());
+  const response = await fetch(url).then((res) => res.json());
 
   return response.data as APIResponse<"api::hasznos-cimek-oldal.hasznos-cimek-oldal"> | null;
 }
 
 export async function getQuoteList() {
   const url = createURL(`/quotes`, {
-    publicationState: "live",
+    "status": "published",
     "sort[0]": "rank:asc",
   });
-  const response = await fetch(url, { next: { tags: ["quotes"] } }).then(
+  const response = await fetch(url).then(
     (res) => res.json()
   );
 
@@ -101,67 +108,67 @@ export async function getOneEvent(slug: string) {
     populate: "*",
     "filters[slug][$eq]": slug,
   });
-  const res = await fetch(url, { next: { tags: ["events"] } });
+  const res = await fetch(url);
   const coll = (await res.json()) as APIResponseCollection<"api::event.event">;
 
   if (coll.meta.pagination.total == 1) {
     return coll.data[0] as unknown as APIResponse<"api::event.event">;
-  } else Promise.reject();
+  } else { throw new Error(`Event not found for slug: ${slug}`); }
 }
 
 export async function getEventTypeList(qStrings?: QueryType) {
   const queryParams = {
     populate: "*",
-    publicationState: "live",
+    "status": "published",
     "sort[0]": "rank:asc",
     ...qStrings,
   };
   const url = createPaginatedURL("/eventtypes", 1, 100, queryParams);
-  const res = await fetch(url, { next: { tags: ["eventtypes"] } });
+  const res = await fetch(url);
   return (await res.json()) as APIResponseCollection<"api::eventtype.eventtype">;
 }
 
 export async function getOneEventType(slug: string) {
   const url = createURL(`/eventtypes`, {
     populate: "*",
-    publicationState: "live",
+    "status": "published",
     "filters[slug][$eq]": slug,
   });
-  const res = await fetch(url, { next: { tags: ["eventtypes"] } });
+  const res = await fetch(url);
   const coll =
     (await res.json()) as APIResponseCollection<"api::eventtype.eventtype">;
 
   if (coll.meta.pagination.total == 1) {
     return coll.data[0] as unknown as APIResponse<"api::eventtype.eventtype">;
-  } else Promise.reject();
+  } else { throw new Error(`EventType not found for slug: ${slug}`); }
 }
 
 export async function getTanitasList(qStrings?: QueryType) {
   const url = createURL("/tanitasok", {
     populate: "*",
-    publicationState: "live",
+    "status": "published",
     "sort[0]": "rank:asc",
     ...qStrings,
   });
-  const res = await fetch(url, { next: { tags: ["tanitasok"] } }).catch((e) => {
-    logger.error(e);
+  const res = await fetch(url).catch((e) => {
+    console.error(e);
+    throw e;
   });
-  return (await res?.json()) as APIResponseCollection<"api::tanitas.tanitas">;
+  return (await res.json()) as APIResponseCollection<"api::tanitas.tanitas">;
 }
 
 export async function getTanusagtetelList(qStrings?: QueryType) {
   const url = createURL("/tanusagtetelek", {
     populate: "*",
-    publicationState: "live",
+    "status": "published",
     "sort[0]": "rank:asc",
     ...qStrings,
   });
-  const res = await fetch(url, { next: { tags: ["tanusagtetelek"] } }).catch(
-    (e) => {
-      logger.error(e);
-    }
-  );
-  return (await res?.json()) as APIResponseCollection<"api::tanusagtetel.tanusagtetel">;
+  const res = await fetch(url).catch((e) => {
+    console.error(e);
+    throw e;
+  });
+  return (await res.json()) as APIResponseCollection<"api::tanusagtetel.tanusagtetel">;
 }
 
 export { apiURL, backendBaseURL };

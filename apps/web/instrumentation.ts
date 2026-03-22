@@ -1,8 +1,2 @@
-export async function register() {
-  if (process.env.NEXT_RUNTIME === "nodejs") {
-    if (process.env.NODE_ENV === 'production') {
-      await require("pino");
-      await require("next-logger");
-    }
-  }
-}
+// Instrumentation intentionally left empty — no server runtime in static export
+export async function register() {}

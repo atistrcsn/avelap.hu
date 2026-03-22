@@ -71,7 +71,7 @@ Each directory has the standard Strapi structure: `controllers/`, `routes/`, `se
 | `tanusagtetel` | Testimonials/stories |
 
 ### Strapi plugins (configured in `apps/api/config/plugins.ts`)
-- **Cloudinary** upload provider (requires `CLOUDINARY_NAME`, `CLOUDINARY_KEY`, `CLOUDINARY_SECRET`)
+- **Cloudflare R2** upload provider via `@strapi/provider-upload-aws-s3` (S3-compatible, requires `R2_ACCESS_KEY_ID`, `R2_ACCESS_SECRET`, `R2_BUCKET`, `R2_ENDPOINT`, `R2_PUBLIC_URL`)
 - **SEO** — `@strapi-community/plugin-seo`
 - **Slugify** — auto-generates slugs for events and eventtypes
 - **Video field** — `@sklinet/strapi-plugin-video-field`
@@ -89,7 +89,7 @@ Uses Next.js App Router. All subpages are in a `(subpages)` route group with a s
 - **UI primitives:** Radix UI (accordion, dialog)
 - **Maps:** `@react-google-maps/api`
 - **Path alias:** `@/*` → `src/*` (configured in `tsconfig.json`)
-- **Maintenance mode:** Set `NEXT_PUBLIC_MAINTENANCE=true` to redirect all traffic to `/maintenance`
+- **Output mode:** Fully static (`output: 'export'` in `next.config.ts`) — no server runtime; deployed to Cloudflare Pages
 
 ### Database
 - **Production:** PostgreSQL (configurable via `DATABASE_*` env vars)
@@ -101,19 +101,35 @@ Uses Next.js App Router. All subpages are in a `(subpages)` route group with a s
 - `GOOGLETAG_ID` — Google Tag Manager
 - `DATABASE_CLIENT` — `postgres` | `mysql` | `sqlite` (defaults to `sqlite`)
 - `DATABASE_HOST`, `DATABASE_PORT`, `DATABASE_NAME`, `DATABASE_USERNAME`, `DATABASE_PASSWORD`
-- `CLOUDINARY_NAME`, `CLOUDINARY_KEY`, `CLOUDINARY_SECRET`
-- `NEXT_PUBLIC_MAINTENANCE` — enables maintenance mode
+- `R2_ACCESS_KEY_ID`, `R2_ACCESS_SECRET` — Cloudflare R2 credentials
+- `R2_BUCKET` — R2 bucket name
+- `R2_ENDPOINT` — R2 S3-compatible endpoint URL
+- `R2_PUBLIC_URL` — Public base URL for served R2 assets
 
-### Images
-Remote image patterns configured in `next.config.ts`: `localhost:1337`, `res.cloudinary.com`, `source.unsplash.com`, `raw.githubusercontent.com`
+Secrets are managed via **Bitwarden Secrets Manager** (`bitwarden/sm-action@v3`). Only `BW_ACCESS_TOKEN` is stored as a GitHub secret; all other secrets are injected at deploy time.
+
+### Images / Upload provider
+Upload provider: `@strapi/provider-upload-aws-s3` configured for **Cloudflare R2** (S3-compatible). Media files are stored in R2 and served via the `R2_PUBLIC_URL` domain.
+
+Remote image patterns configured in `next.config.ts`: `localhost:1337`, R2 public domain (set via `R2_PUBLIC_URL`), `source.unsplash.com`, `raw.githubusercontent.com`
 
 ## CI/CD
 
-GitHub Actions (`.github/workflows/ci.yml`):
-- Builds affected projects on push to `main` and PRs
-- Deploy jobs scaffolded but not yet implemented:
-  - API → Koyeb
-  - Web → Cloudflare
+### Workflows
+- **`.github/workflows/ci.yml`** — Lint and build check on PRs and push to `main` (NX affected)
+- **`.github/workflows/deploy.yml`** — Production deployment; triggers on:
+  - Push to `main`
+  - `repository_dispatch` event with type `strapi-content-change` (fired by Strapi lifecycle hook when content is published)
+
+### Deployment targets
+- **API → Koyeb**: Dockerized Node 22 Alpine image, scale-to-zero enabled, Neon PostgreSQL as managed database
+- **Web → Cloudflare Pages**: Fully static export (`output: 'export'`), project name `avelap-hu`
+
+### Secrets management
+All secrets are stored in **Bitwarden Secrets Manager** and injected at deploy time via `bitwarden/sm-action@v3`. The only GitHub secret required is `BW_ACCESS_TOKEN`.
+
+### Content rebuild webhook
+A Strapi lifecycle hook fires a GitHub `repository_dispatch` (`strapi-content-change`) on content publish events, triggering a fresh static build and deploy of the web app.
 
 ## Development Setup
 
