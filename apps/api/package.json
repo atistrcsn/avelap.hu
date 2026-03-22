@@ -55,5 +55,32 @@
       "react": "~18.3.1",
       "react-dom": "~18.3.1"
     }
+  },
+  "nx": {
+    "targets": {
+      "build": {
+        "executor": "@nx/js:tsc",
+        "options": {
+          "buildTarget": "api:build",
+          "outputPath": "dist/apps/api",
+          "main": "apps/api/dist/index.js",
+          "tsConfig": "apps/api/tsconfig.json"
+        },
+        "outputs": [
+          "{workspaceRoot}/dist/apps/api"
+        ],
+        "cache": true
+      },
+      "lint": {
+        "executor": "@nx/eslint:lint",
+        "options": {
+          "lintFilePatterns": [
+            "apps/api/**/*.{ts,tsx,js,jsx}"
+          ]
+        },
+        "cache": true
+      }
+    },
+    "tags": []
   }
 }
