@@ -6,6 +6,34 @@
     "lint": "nx eslint:lint"
   },
   "packageManager": "pnpm@10.25.0",
+  "pnpm": {
+    "overrides": {
+      "@strapi/design-system": "2.2.0",
+      "zod": "^3.25.76"
+    },
+    "peerDependencyRules": {
+      "ignoreMissing": [
+        "@codemirror/view"
+      ],
+      "allowedVersions": {
+        "react": "*",
+        "react-dom": "*",
+        "@types/react": "*",
+        "@types/react-dom": "*"
+      }
+    },
+    "onlyBuiltDependencies": [
+      "@strapi/strapi",
+      "@swc/core",
+      "better-sqlite3",
+      "core-js-pure",
+      "esbuild",
+      "nx",
+      "sharp",
+      "unrs-resolver",
+      "workerd"
+    ]
+  },
   "devDependencies": {
     "wrangler": "^4"
   }

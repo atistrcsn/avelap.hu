@@ -21,22 +21,25 @@
     "@strapi-community/plugin-seo": "^2.0.9",
     "@strapi/plugin-documentation": "5.40.0",
     "@strapi/plugin-users-permissions": "5.40.0",
-    "@strapi/provider-upload-aws-s3": "^5.31.3",
+    "@strapi/provider-upload-aws-s3": "^5.40.0",
     "@strapi/strapi": "5.40.0",
     "@yunusemrejs/drag-drop-content-types-strapi5": "^1.0.11",
     "pg": "^8.16.3",
     "pg-connection-string": "^2.9.1",
     "react": "~18.3.1",
     "react-dom": "~18.3.1",
-    "react-router-dom": "^6.0.0",
+    "react-router-dom": "^6.30.3",
+    "@strapi/sdk-plugin": "^5.3.1",
+    "@strapi/typescript-utils": "^5.40.0",
     "strapi-plugin-config-sync": "^3.1.2",
     "styled-components": "^6.1.19"
   },
   "devDependencies": {
+    "@types/react": "~18.3.1",
+    "@types/react-dom": "~18.3.1",
     "@babel/core": "^7.25.0",
     "@babel/plugin-transform-runtime": "^7.25.0",
     "@babel/preset-react": "^7.25.0",
-    "@strapi/typescript-utils": "^5.32.0",
     "@types/node": "^22.19.3",
     "babel-loader": "^9.2.0",
     "better-sqlite3": "12.5.0",
@@ -48,12 +51,6 @@
   "strapi": {
     "uuid": "d5f5c158-e89f-4505-847f-4cefe7ccd649",
     "telemetryDisabled": true
-  },
-  "pnpm": {
-    "overrides": {
-      "react": "~18.3.1",
-      "react-dom": "~18.3.1"
-    }
   },
   "nx": {
     "targets": {

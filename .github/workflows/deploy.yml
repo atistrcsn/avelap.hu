@@ -13,12 +13,65 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  deploy:
+  # ── API: build Docker image and deploy to Koyeb ─────────────────────────────
+  # Runs only on code pushes — content-only changes don't need a new image.
+  build-api:
+    if: github.event_name == 'push'
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write   # required to push to ghcr.io
+
     steps:
       - uses: actions/checkout@v4
 
-      # Fetch all required secrets from Bitwarden Secrets Manager.
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: apps/api/Dockerfile
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository_owner }}/avelap-api:latest
+            ghcr.io/${{ github.repository_owner }}/avelap-api:sha-${{ github.sha }}
+
+      # Fetch Koyeb API token from Bitwarden.
+      # Replace the UUID below once the Koyeb API token is stored in Bitwarden.
+      - name: Get Koyeb token from Bitwarden
+        uses: bitwarden/sm-action@v3
+        with:
+          access_token: ${{ secrets.BW_ACCESS_TOKEN }}
+          secrets: |
+            <KOYEB_TOKEN_BW_UUID> > KOYEB_TOKEN
+
+      # Install Koyeb CLI and trigger redeploy.
+      # Replace <app-name>/<service-name> with the actual names from Koyeb dashboard.
+      - name: Install Koyeb CLI
+        uses: koyeb-community/koyeb-actions@v2
+        with:
+          api_token: ${{ env.KOYEB_TOKEN }}
+
+      - name: Trigger Koyeb redeploy
+        run: koyeb service redeploy <app-name>/<service-name>
+
+  # ── Web: build Next.js static export and deploy to Cloudflare Pages ─────────
+  # Runs after build-api on code pushes, and directly on content-change events.
+  # 'always()' ensures it runs even when build-api was skipped (content dispatch).
+  deploy-web:
+    needs: build-api
+    if: always() && !failure() && !cancelled()
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
       - name: Get Secrets from Bitwarden
         uses: bitwarden/sm-action@v3
         with:
@@ -42,21 +95,21 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
-      # Koyeb free-tier instances spin down when idle; poll the health endpoint
-      # until Strapi responds (up to 90 s = 18 attempts x 5 s) before building,
-      # so the Next.js static export can reach live content-type data.
+      # Koyeb free-tier instances spin down when idle; on a fresh code deploy the
+      # new image also needs to be pulled and started — allow up to 10 minutes.
+      # Polls every 10 s (60 attempts). Exits early as soon as Strapi responds.
       - name: Wake Strapi
         run: |
-          echo "Waking Strapi..."
-          for i in $(seq 1 18); do
+          echo "Waiting for Strapi..."
+          for i in $(seq 1 60); do
             if curl -sf "$API_BASEURL/_health" > /dev/null 2>&1; then
               echo "Strapi is ready after $i attempts"
               exit 0
             fi
-            echo "Attempt $i/18 - waiting 5s..."
-            sleep 5
+            echo "Attempt $i/60 - waiting 10s..."
+            sleep 10
           done
-          echo "ERROR: Strapi did not wake up within 90 seconds"
+          echo "ERROR: Strapi did not become ready within 10 minutes"
           exit 1
 
       # Static export: Next.js reads content from the live Strapi API at build time

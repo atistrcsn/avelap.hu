@@ -19,9 +19,9 @@
     "files.watcherExclude": {
         "**/.git/objects/**": true,
         "**/.git/subtree-cache/**": true,
-        "**/node_modules/**": true,
         "**/.next/**": true,
+        "**/.tmp/**": true,
         "**/dist/**": true,
-        "**/.tmp/**": true
+        "**/node_modules/*/**": true
     }
 }
