@@ -112,7 +112,7 @@ export async function getOneEvent(slug: string) {
   const coll = (await res.json()) as APIResponseCollection<"api::event.event">;
 
   if (coll.meta.pagination.total == 1) {
-    return coll.data[0] as unknown as APIResponse<"api::event.event">;
+    return coll.data[0];
   } else { throw new Error(`Event not found for slug: ${slug}`); }
 }
 
@@ -139,7 +139,7 @@ export async function getOneEventType(slug: string) {
     (await res.json()) as APIResponseCollection<"api::eventtype.eventtype">;
 
   if (coll.meta.pagination.total == 1) {
-    return coll.data[0] as unknown as APIResponse<"api::eventtype.eventtype">;
+    return coll.data[0];
   } else { throw new Error(`EventType not found for slug: ${slug}`); }
 }
 

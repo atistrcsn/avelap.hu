@@ -16,9 +16,9 @@ export const dynamicParams = false;
 export async function generateStaticParams() {
   let events = await getEventTypeList();
 
-  return events.data.map((data) => ({
-    slug: data.slug,
-  }));
+  return events.data
+    .filter((data) => data.slug)
+    .map((data) => ({ slug: data.slug as string }));
 }
 
 export default async function EventRoute(

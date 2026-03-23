@@ -7,20 +7,13 @@
     {
       "name": "admin",
       "request": "launch",
-      "type": "chrome",
-      "url": "http://localhost:1337/admin",
+      "type": "editor-browser",
+      "url": "http://localhost:1337",
       "webRoot": "${workspaceFolder}/apps/api"      
     },
     {
-      "type": "node",
-      "request": "launch",
-      "name": "Launch Program",
-      "skipFiles": ["<node_internals>/**"],
-      "program": "${file}"
-    },
-    {
       "name": "web",
-      "type": "chrome",
+      "type": "editor-browser",
       "request": "launch",
       "url": "http://localhost:3000",
       "webRoot": "${workspaceFolder}/apps/web"

@@ -5,5 +5,8 @@
     "build": "nx next:build && echo 'Build complete'",
     "lint": "nx eslint:lint"
   },
-  "packageManager": "pnpm@10.25.0"
+  "packageManager": "pnpm@10.25.0",
+  "devDependencies": {
+    "wrangler": "^4"
+  }
 }

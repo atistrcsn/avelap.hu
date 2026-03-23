@@ -106,3 +106,4 @@ db.backup
 .nx/installation
 .nx/cache
 .nx/workspace-data
+.wrangler

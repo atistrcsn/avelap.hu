@@ -1,3 +1,5 @@
+export const dynamic = "force-static";
+
 import { AveConfig } from "@/app/app-config";
 import { getEvents, getEventTypeList } from "@/utils/api-requests";
 import type { MetadataRoute } from "next";
@@ -39,7 +41,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const url = `${baseurl}${AveConfig.navItems.ESEMENYEK.path}/${evt?.slug}`;
     links.push({
       url: url,
-      lastModified: evt.updatedAt,
+      lastModified: evt.updatedAt ?? undefined,
       priority: 0.8,
       changeFrequency: "weekly",
     });
@@ -49,7 +51,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const url = `${baseurl}${AveConfig.navItems.PROGRAMJAINK.path}/${item?.slug}`;
     links.push({
       url: url,
-      lastModified: item.updatedAt,
+      lastModified: item.updatedAt ?? undefined,
       priority: 0.8,
       changeFrequency: "daily",
     });

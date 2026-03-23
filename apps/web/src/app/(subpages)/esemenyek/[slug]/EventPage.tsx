@@ -6,7 +6,6 @@ import { APIResponse } from "@/types/types";
 import { cn, formatDateRange } from "@/utils";
 import { BlocksContent, BlocksRenderer } from "@strapi/blocks-react-renderer";
 import { Data } from "@strapi/strapi";
-import { isNull } from "lodash";
 import Image from "next/image";
 import { FaGlobeEurope } from "react-icons/fa";
 import { FaCalendar, FaCircleInfo, FaWpforms } from "react-icons/fa6";
@@ -79,8 +78,8 @@ export default async function EventPage({
             {dateRange.range ? dateRange.range : dateRange.startDate}
           </p>
           <AddToCalendarButton
-            name={event?.title}
-            description={event?.description}
+            name={event?.title ?? undefined}
+            description={event?.description ?? undefined}
             startDate={event?.eventstart?.toString()}
             endDate={event?.eventend?.toString()}
             timeZone="Europe/Budapest"

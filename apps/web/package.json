@@ -9,7 +9,7 @@
     "copytypes": "node copy-backend-types.js",
     "develop": "node --experimental-modules start-dev.mjs",
     "lint": "eslint .",
-    "start": "next start -H 0.0.0.0 -p ${PORT:-8080}",
+    "start": "npx http-server out -p ${PORT:-8080} --gzip -c-1",
     "start-network": "node --experimental-modules start.mjs"
   },
   "dependencies": {

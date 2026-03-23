@@ -14,8 +14,8 @@ export async function TanitasList() {
           return (
             <TanitasItemComponent
               key={tanitas.id}
-              title={tanitas.cim}
-              desc={tanitas.leiras}
+              title={tanitas.cim ?? ""}
+              desc={tanitas.leiras ?? undefined}
               videoID={urll}
             />
           );

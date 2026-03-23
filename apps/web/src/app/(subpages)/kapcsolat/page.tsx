@@ -61,12 +61,12 @@ function KapcsolatPage() {
           </SubHeading>
           <p>
             <a
-              href="mailto:egyedulallo@emmanuel.hu"
+              href="mailto:avekurzus@gmail.com"
               target="_blank"
               title="Kattintson ide az alapértelmezett levelező program megnyitásához."
               className="font-mono" rel="noreferrer"
             >
-              egyedulallo [kukac] emmanuel.hu
+              avekurzus [kukac] gmail.com
             </a>
           </p>
         </div>

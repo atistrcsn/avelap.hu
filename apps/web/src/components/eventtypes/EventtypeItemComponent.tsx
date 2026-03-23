@@ -59,7 +59,7 @@ function EventtypeItemComponent({
         <div className="flex-row flex justify-end mt-auto">
           <NavLink
             href={`${AveConfig.navItems.PROGRAMJAINK.path}/${encodeURIComponent(
-              slug
+              slug ?? ""
             )}`}
             buttontype={isEven ? "OUTLINE-LIGHT" : "OUTLINE"}
             iconbefore={<FaRegArrowAltCircleRight size={21} />}

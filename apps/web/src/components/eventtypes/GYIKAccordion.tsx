@@ -4,11 +4,11 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/accordion/accordion";
-import { APIResponseData } from "@/types/types";
 import { BlocksRenderer } from "@strapi/blocks-react-renderer";
+import { Data } from "@strapi/strapi";
 
 type AccordionProps = {
-  data: APIResponseData<"api::gyakori-kerdes.gyakori-kerdes">[];
+  data: Data.ContentType<"api::gyakori-kerdes.gyakori-kerdes">[];
 };
 
 export default function GYIKAccordion({ data }: AccordionProps) {
@@ -20,7 +20,7 @@ export default function GYIKAccordion({ data }: AccordionProps) {
             <AccordionItem key={gyik.id} value={`${gyik.id}`}>
               <AccordionTrigger>{gyik.kerdes}</AccordionTrigger>
               <AccordionContent className="">
-                <BlocksRenderer content={gyik.valasz} />
+                {gyik.valasz && <BlocksRenderer content={gyik.valasz} />}
               </AccordionContent>
             </AccordionItem>
           );

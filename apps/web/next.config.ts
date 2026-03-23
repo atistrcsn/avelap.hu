@@ -1,6 +1,8 @@
 import packageJson from "./package.json" with { type: "json" };
 import type { NextConfig } from 'next'
 
+const r2Hostname = process.env.R2_PUBLIC_URL ? new URL(process.env.R2_PUBLIC_URL).hostname : '';
+
 
 const version = packageJson.version
 
@@ -34,11 +36,7 @@ const nextConfig: NextConfig = {
         hostname: 'source.unsplash.com',
         port: '',
       },
-      {
-        protocol: 'https',
-        hostname: 'res.cloudinary.com',
-        port: '',
-      },
+      ...(r2Hostname ? [{ protocol: 'https' as const, hostname: r2Hostname, port: '' }] : []),
       {
         protocol: 'https',
         hostname: 'raw.githubusercontent.com',

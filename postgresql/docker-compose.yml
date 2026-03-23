@@ -17,7 +17,7 @@ services:
 #      LANGUAGE: hu_HU:hu
 #      LC_ALL: hu_HU.UTF-8
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres -p 5432 -t2"]
+      test: ["CMD-SHELL", "pg_isready -U strapi -p 5432 -t2"]
       interval: 30s
       timeout: 30s
       retries: 3

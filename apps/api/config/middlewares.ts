@@ -24,14 +24,14 @@ export default [
             "data:",
             "blob:",
             "market-assets.strapi.io",
-            "res.cloudinary.com"
+            ...(process.env.R2_PUBLIC_URL ? [new URL(process.env.R2_PUBLIC_URL).hostname] : [])
           ],
           "media-src": [
             "'self'",
             "data:",
             "blob:",
             "market-assets.strapi.io",
-            "res.cloudinary.com"
+            ...(process.env.R2_PUBLIC_URL ? [new URL(process.env.R2_PUBLIC_URL).hostname] : [])
           ],
           "frame-src": [
             "'self'",

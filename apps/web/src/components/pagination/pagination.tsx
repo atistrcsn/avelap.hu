@@ -1,7 +1,6 @@
 "use client";
 
 import { AveConfig } from "@/app/app-config";
-import { isEmpty, pickBy } from "lodash";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import queryString from "query-string";
@@ -70,9 +69,8 @@ export const Pagination: FC<PaginationProps> = ({
   }, [router]);
 
   if (!hasRouter) return null;
-  const query = pickBy(
-    { ...(searchParams.entries() || {}) },
-    (q) => !isEmpty(q)
+  const query = Object.fromEntries(
+    [...searchParams.entries()].filter(([, v]) => v !== "" && v != null)
   );
   const currentPage = Number(searchParams.get("page") || 1);
   const pageSize = Number(searchParams.get("size")) || sizes[0];

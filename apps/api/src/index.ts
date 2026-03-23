@@ -70,6 +70,16 @@ async function generateUniqueSlug(
 /** Actions that indicate meaningful content changes and should trigger a rebuild. */
 const DEPLOY_ACTIONS = new Set(['create', 'update', 'delete', 'publish', 'unpublish']);
 
+/** Content types whose changes should trigger a frontend rebuild. */
+const DEPLOY_TYPES = new Set([
+  'api::event.event',
+  'api::eventtype.eventtype',
+  'api::gyakori-kerdes.gyakori-kerdes',
+  'api::quote.quote',
+  'api::tanitas.tanitas',
+  'api::tanusagtetel.tanusagtetel',
+]);
+
 /**
  * Fire a GitHub repository_dispatch event so the CI/CD pipeline rebuilds
  * and deploys the Next.js frontend after content changes in Strapi.
@@ -147,7 +157,7 @@ export default {
       }
 
       // ── Deploy webhook (runs AFTER the operation completes) ───────────────
-      if (DEPLOY_ACTIONS.has(context.action)) {
+      if (DEPLOY_ACTIONS.has(context.action) && DEPLOY_TYPES.has(context.uid)) {
         // Fire-and-forget: we await so errors are logged in this request cycle,
         // but we never throw to the caller.
         await triggerDeploy(strapi);
