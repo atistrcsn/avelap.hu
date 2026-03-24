@@ -4,7 +4,7 @@ import GYIKAccordion from "@/components/eventtypes/GYIKAccordion";
 import { PageHeading } from "@/components/page-heading";
 import { APIResponse } from "@/types/types";
 import { cn } from "@/utils";
-import { getPaginatedEvents } from "@/utils/api-requests";
+import { getEventListQueryParams, getPaginatedEvents } from "@/utils/api-requests";
 import { BlocksContent, BlocksRenderer } from "@strapi/blocks-react-renderer";
 import { Data } from "@strapi/strapi";
 import Image from "next/image";
@@ -19,6 +19,7 @@ export default async function EventTypePage({
 
   const relatedFutureEventList = await getPaginatedEvents(1, 30, {
     "filters[eventtype][id][$eq]": datas?.id || 0,
+    ...getEventListQueryParams(),
   });
 
   const faqList =
@@ -63,20 +64,24 @@ export default async function EventTypePage({
           content={datas?.descriptionLongHTML as BlocksContent}
         />
       </div>
-      {relatedFutureEventList?.data?.length != 0 && (
-        <>
-          <h1 className="text-ave-blue inline-flex flex-col items-start gap-1 mb-10 mt-10">
-            <span className="text-[20px] font-semibold uppercase font-ibmplexsans">
-              Következő{" "}
-              <span className="text-ave-gold-400-base">{datas?.title}</span>
-            </span>
-            <span className="text-4xl font-playfairdisplay font-bold">
-              Események
-            </span>
-          </h1>
+      <>
+        <h1 className="text-ave-blue inline-flex flex-col items-start gap-1 mb-10 mt-10">
+          <span className="text-[20px] font-semibold uppercase font-ibmplexsans">
+            Következő{" "}
+            <span className="text-ave-gold-400-base">{datas?.title}</span>
+          </span>
+          <span className="text-4xl font-playfairdisplay font-bold">
+            Események
+          </span>
+        </h1>
+        {relatedFutureEventList?.data?.length != 0 ? (
           <EventListComponent data={relatedFutureEventList} />
-        </>
-      )}
+        ) : (
+          <p className="text-ave-text-black/60 border border-dashed border-ave-text-black/20 rounded-lg px-6 py-4">
+            Jelenleg nincs felvéve jövőbeni esemény.
+          </p>
+        )}
+      </>
       {faqList && (
         <div className="prose prose-lg lg:prose-xl mb-10 mt-10">
           <h1 className="text-ave-blue inline-flex flex-col items-start gap-1 ">

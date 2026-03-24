@@ -68,7 +68,7 @@ async function generateUniqueSlug(
 // ─── Deploy webhook ────────────────────────────────────────────────────────────
 
 /** Actions that indicate meaningful content changes and should trigger a rebuild. */
-const DEPLOY_ACTIONS = new Set(['create', 'update', 'delete', 'publish', 'unpublish']);
+const DEPLOY_ACTIONS = new Set(['publish', 'unpublish', 'delete']);
 
 /** Content types whose changes should trigger a frontend rebuild. */
 const DEPLOY_TYPES = new Set([

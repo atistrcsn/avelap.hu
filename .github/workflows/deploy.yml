@@ -105,9 +105,11 @@ jobs:
           key: nextjs-${{ hashFiles('apps/web/package.json') }}-${{ hashFiles('apps/web/src/**') }}
           restore-keys: nextjs-
 
-      # Koyeb free-tier instances spin down when idle; on a fresh code deploy the
-      # new image also needs to be pulled and started — allow up to 10 minutes.
-      # Polls every 10 s (60 attempts). Exits early as soon as Strapi responds.
+      # Clear fetch-cache so the build always fetches fresh data from Strapi.
+      # The compilation cache (turbopack/) is kept for faster builds.
+      - name: Clear Next.js fetch cache
+        run: rm -rf apps/web/.next/cache/fetch-cache
+
       # Koyeb free-tier instances spin down when idle; on a fresh code deploy the
       # new image also needs to be pulled and started — allow up to 10 minutes.
       # Polls every 10 s (60 attempts). Exits early as soon as Strapi responds.
