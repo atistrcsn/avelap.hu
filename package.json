@@ -9,7 +9,9 @@
   "pnpm": {
     "overrides": {
       "@strapi/design-system": "2.2.0",
-      "zod": "^3.25.76"
+      "zod": "^3.25.76",
+      "@types/react": "^19",
+      "@types/react-dom": "^19"
     },
     "peerDependencyRules": {
       "ignoreMissing": [

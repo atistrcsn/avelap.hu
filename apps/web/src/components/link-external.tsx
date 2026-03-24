@@ -1,11 +1,9 @@
 "use client";
 import Link, { LinkProps } from "next/link";
-import { AnchorHTMLAttributes, FC, ReactNode } from "react";
+import { AnchorHTMLAttributes, FC, PropsWithChildren } from "react";
 import { FaExternalLinkAlt } from "react-icons/fa";
 
-type AveInlineLinkExternalProps = {
-  children?: ReactNode;
-} & AnchorHTMLAttributes<HTMLAnchorElement>;
+type AveInlineLinkExternalProps = PropsWithChildren<AnchorHTMLAttributes<HTMLAnchorElement>>;
 
 export const AveInlineLinkExternal: FC<AveInlineLinkExternalProps> = ({
   children,
@@ -23,9 +21,7 @@ export const AveInlineLinkExternal: FC<AveInlineLinkExternalProps> = ({
   );
 };
 
-type AveInlineLinkProps = {
-  children?: ReactNode;
-} & LinkProps;
+type AveInlineLinkProps = PropsWithChildren<Omit<LinkProps, "children">>;
 
 export const AveInlineLink: FC<AveInlineLinkProps> = ({ children, ...props }) => {
   return (
