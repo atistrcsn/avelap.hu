@@ -47,23 +47,12 @@ RUN pnpm build
 # ─── Stage 3: runner ──────────────────────────────────────────────────────────
 # Lean production image: only runtime artifacts and production dependencies.
 # better-sqlite3 lives in devDependencies so --prod naturally excludes it.
-#
-# Two processes run via supervisord:
-#   1. cloudflared — outbound Cloudflare Tunnel (no exposed port needed)
-#   2. strapi start — Strapi API on localhost:1337
 FROM node:22-alpine AS runner
 
 RUN corepack enable && corepack prepare pnpm@10.25.0 --activate
 
-# supervisor: manages both cloudflared and strapi processes
-# curl + unzip: needed to download cloudflared and bws binaries
-RUN apk add --no-cache supervisor curl unzip
-
-# cloudflared: statically linked, works on Alpine (musl).
-ARG CLOUDFLARED_VERSION=2026.3.0
-RUN curl -fsSL "https://github.com/cloudflare/cloudflared/releases/download/${CLOUDFLARED_VERSION}/cloudflared-linux-amd64" \
-    -o /usr/local/bin/cloudflared \
- && chmod +x /usr/local/bin/cloudflared
+# curl + unzip: needed to download the bws binary
+RUN apk add --no-cache curl unzip
 
 # bws: Bitwarden Secrets Manager CLI (musl build — Alpine compatible).
 # Injects all secrets at container startup; Koyeb only needs BWS_ACCESS_TOKEN.
@@ -86,7 +75,9 @@ COPY apps/api/package.json ./apps/api/package.json
 
 # Install only production dependencies (skips devDependencies including
 # better-sqlite3, vite, babel-loader, and TypeScript tooling).
-RUN pnpm install --frozen-lockfile --prod --filter @avelap/api...
+RUN pnpm install --frozen-lockfile --prod --filter @avelap/api... \
+    --store-dir /tmp/pnpm-store \
+ && rm -rf /tmp/pnpm-store
 
 # Copy runtime source and built artifacts from the builder stage.
 # database/ is intentionally omitted: production uses PostgreSQL (no local DB
@@ -96,9 +87,6 @@ COPY --from=builder /app/apps/api/src       ./apps/api/src
 COPY --from=builder /app/apps/api/config    ./apps/api/config
 COPY --from=builder /app/apps/api/dist      ./apps/api/dist
 COPY --from=builder /app/apps/api/public    ./apps/api/public
-
-# supervisord config — copied before chown so strapi user can read it
-COPY apps/api/supervisord.conf /etc/supervisord.conf
 
 # Pre-create runtime directories Strapi writes to at startup.
 RUN mkdir -p /app/apps/api/.strapi /app/apps/api/.tmp /app/apps/api/database/migrations
@@ -122,6 +110,7 @@ ENV BWS_PROJECT_ID=1c33f458-ac81-4977-a067-b41500a4e5b0
 
 WORKDIR /app/apps/api
 
-# No EXPOSE: traffic enters exclusively via Cloudflare Tunnel (outbound only).
+EXPOSE 1337
+
 # Shell form is required here so $BWS_PROJECT_ID is expanded at runtime.
-CMD bws run --project-id "$BWS_PROJECT_ID" -- supervisord -c /etc/supervisord.conf
+CMD bws run --project-id "$BWS_PROJECT_ID" -- pnpm start

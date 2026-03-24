@@ -43,23 +43,21 @@ jobs:
             ghcr.io/${{ github.repository_owner }}/avelap-api:sha-${{ github.sha }}
 
       # Fetch Koyeb API token from Bitwarden.
-      # Replace the UUID below once the Koyeb API token is stored in Bitwarden.
       - name: Get Koyeb token from Bitwarden
         uses: bitwarden/sm-action@v3
         with:
           access_token: ${{ secrets.BW_ACCESS_TOKEN }}
           secrets: |
-            <KOYEB_TOKEN_BW_UUID> > KOYEB_TOKEN
+            726d39bf-42ed-425b-8625-b416018b3b27 > KOYEB_TOKEN
 
       # Install Koyeb CLI and trigger redeploy.
-      # Replace <app-name>/<service-name> with the actual names from Koyeb dashboard.
       - name: Install Koyeb CLI
         uses: koyeb-community/koyeb-actions@v2
         with:
           api_token: ${{ env.KOYEB_TOKEN }}
 
       - name: Trigger Koyeb redeploy
-        run: koyeb service redeploy <app-name>/<service-name>
+        run: koyeb service redeploy useless-belle/avelap-api
 
   # ── Web: build Next.js static export and deploy to Cloudflare Pages ─────────
   # Runs after build-api on code pushes, and directly on content-change events.
