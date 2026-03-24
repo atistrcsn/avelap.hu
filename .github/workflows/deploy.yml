@@ -51,7 +51,7 @@ jobs:
       - name: Get Koyeb token from Bitwarden
         uses: bitwarden/sm-action@v2
         with:
-          access_token: ${{ secrets.BW_ACCESS_TOKEN }}
+          access_token: ${{ secrets.BWS_ACCESS_TOKEN }}
           secrets: |
             726d39bf-42ed-425b-8625-b416018b3b27 > KOYEB_TOKEN
 
@@ -78,7 +78,7 @@ jobs:
       - name: Get Secrets from Bitwarden
         uses: bitwarden/sm-action@v2
         with:
-          access_token: ${{ secrets.BW_ACCESS_TOKEN }}
+          access_token: ${{ secrets.BWS_ACCESS_TOKEN }}
           secrets: |
             ecc1ef6e-f60a-46b9-9a0f-b41500b41e27 > API_BASEURL
             3be3df10-f821-4166-8d84-b41500b77dc1 > GOOGLETAG_ID
