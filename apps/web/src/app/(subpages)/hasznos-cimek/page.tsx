@@ -11,7 +11,8 @@ export const metadata: Metadata = {
 async function HasznosCimekPageRoute() {
   // const data = (await getHasznosLinkekContent())?;
 
-  return (
+  return (<>
+
     <article className="prose prose-lg lg:prose-xl prose-p:my-0 prose-h2:text-ave-gold-400-base">
       <PageHeading>{AveConfig.navItems.HASZNOS_CIMEK.title}</PageHeading>
       {/* {data && <BlocksRenderer content={data.tartalom} />} */}
@@ -134,6 +135,32 @@ async function HasznosCimekPageRoute() {
         </div>
       </div>
     </article>
+
+    <h1 className="text-ave-blue inline-flex flex-col items-start gap-1 mb-10 mt-10">
+      <span className="text-[20px] font-semibold uppercase font-ibmplexsans">
+        További     
+      </span>
+      <span className="text-4xl font-playfairdisplay font-bold">
+        Támogatás, segítség
+      </span>
+    </h1>
+    <a href="https://bizdramagad.hu/" target="_blank" rel="noopener" className="flex justify-center">
+      <img
+        src="/images/BRM_banner_920x110.jpg"
+        alt="Bízd Rá Magad - Itt segítőkre találsz!"
+        className="hidden md:block"
+        width={920}
+        height={110}
+      />
+      <img
+        src="/images/BRM_banner_300x250.jpg"
+        alt="Bízd Rá Magad - Itt segítőkre találsz!"
+        className="block md:hidden"
+        width={300}
+        height={250}
+      />
+    </a>
+    </>
   );
 }
 

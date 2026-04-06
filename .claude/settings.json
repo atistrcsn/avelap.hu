@@ -47,7 +47,8 @@
       "Write(./.claude/settings.local.json)"
     ]
   },
-  "sandbox": {
+  "model": "opusplan",  
+  "sandbox": {    
     "enabled": true,
     "autoAllowBashIfSandboxed": true,
     "network": {
