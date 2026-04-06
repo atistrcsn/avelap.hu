@@ -153,9 +153,11 @@ async function HasznosCimekPageRoute() {
         height={110}
       />
       <img
-        src="/images/BRM_kep_300x250.jpg"
+        src="/images/BRM_kep_298x248.jpg"
         alt="Bízd Rá Magad - Itt segítőkre találsz!"
-        className="block md:hidden w-[298px] h-[248px]"
+        className="block md:hidden"
+        width={298}
+        height={248}
       />
     </a>
     </>
